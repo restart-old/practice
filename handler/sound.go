@@ -8,12 +8,8 @@ import (
 )
 
 func (h *WorldHandler) HandleSound(ctx *event.Context, s world.Sound, pos mgl64.Vec3) {
-	attackFalse := sound.Attack{Damage: false}
-	attackTrue := sound.Attack{Damage: true}
-	punchAir := sound.Attack{}
-
-	switch s {
-	case attackFalse, attackTrue, punchAir:
+	switch s.(type) {
+	case sound.Attack:
 		ctx.Cancel()
 	}
 }
