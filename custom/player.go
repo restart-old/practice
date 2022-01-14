@@ -139,7 +139,7 @@ func (p *Player) AddToWorld(w *world.World) {
 	p.player.Teleport(w.Spawn().Vec3())
 }
 
-// Kill
+// Kill ...
 func (p *Player) Kill(src damage.Source) {
 	switch src := src.(type) {
 
@@ -157,7 +157,7 @@ func (p *Player) Kill(src damage.Source) {
 	}
 }
 
-// ReKit
+// ReKit ...
 func (p *Player) ReKit() {
 	player := p.Player()
 	if t, ok := p.Combat(); ok {

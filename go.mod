@@ -5,7 +5,7 @@ go 1.17
 require (
 	github.com/RestartFU/gophig v0.0.0-20220114004832-105ae125b823
 	github.com/RestartFU/list v0.0.0-20220114005014-9b91b47e9e9a
-	github.com/df-mc/dragonfly v0.5.2-0.20220114040157-109474c3adac
+	github.com/df-mc/dragonfly v0.5.2-0.20220114180301-3f677d1e0f28
 	github.com/df-plus/ffa v0.0.0-20220114024356-01dd45bfd211
 	github.com/df-plus/items v0.0.0-20220109233307-86aeb008f711
 	github.com/df-plus/kit v0.0.0-20220114033159-ad625b238a90
