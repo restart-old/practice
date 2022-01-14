@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/RestartFU/practice/custom"
+	"github.com/RestartFU/practice/handler/handler_combo"
 
 	"github.com/RestartFU/practice/ffas"
 	"github.com/RestartFU/practice/handler"
@@ -82,6 +83,7 @@ func handleJoin(p *custom.Player) {
 
 	h.AddHandler(handler.NewPlayerHandler(p))
 	h.AddHandler(items.NewPlayerHandler(p.Player()))
+	h.AddHandler(handler_combo.NewComboHandler(p))
 
 	p.Player().Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§eFFA - Unranked"))
 }

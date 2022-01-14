@@ -11,13 +11,17 @@ import (
 )
 
 type Player struct {
-	player  *player.Player
-	s       *Server
+	player *player.Player
+	s      *Server
+
+	combo int
+	cps   int
+
 	pearlCD time.Time
-	cps     int
 	chatCD  time.Time
 	combat  time.Time
-	ffa     ffa.FFA
+
+	ffa ffa.FFA
 }
 
 // NewPlayer returns a new *Player.
@@ -100,3 +104,12 @@ func (p *Player) SetFFA(ffa ffa.FFA) { p.ffa = ffa }
 
 // FFA ...
 func (p *Player) FFA() (ffa.FFA, bool) { return p.ffa, p.ffa != nil }
+
+// ResetCombo ...
+func (p *Player) ResetCombo() { p.combo = 0 }
+
+// AddCombo ...
+func (p *Player) AddCombo(n int) { p.combo += n }
+
+// Combo ...
+func (p *Player) Combo() int { return p.combo }
