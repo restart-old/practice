@@ -4,6 +4,9 @@ import (
 	"time"
 
 	"github.com/df-mc/dragonfly/server/cmd"
+	"github.com/df-mc/dragonfly/server/entity/healing"
+	"github.com/df-mc/dragonfly/server/item"
+	"github.com/df-mc/dragonfly/server/item/tool"
 	"github.com/df-mc/dragonfly/server/player"
 	"github.com/df-mc/dragonfly/server/world"
 	"github.com/df-plus/ffa"
@@ -113,3 +116,47 @@ func (p *Player) AddCombo(n int) { p.combo += n }
 
 // Combo ...
 func (p *Player) Combo() int { return p.combo }
+
+// RemoveAllEffects ...
+func (p *Player) RemoveAllEffects() {
+	for _, e := range p.Player().Effects() {
+		p.Player().RemoveEffect(e.Type())
+	}
+}
+
+// WouldDie ...
+func (p *Player) WouldDie(damage float64) bool {
+	return p.Player().Health()-damage <= 0
+}
+
+// AddToWorld ...
+func (p *Player) AddToWorld(w *world.World) {
+	p.player.World().RemoveEntity(p.player)
+	w.AddEntity(p.player)
+	p.player.Teleport(w.Spawn().Vec3())
+}
+
+// Spawn
+
+func (p *Player) Spawn() {
+	player := p.player
+
+	for _, e := range p.World().Entities() {
+		if _, ok := e.(world.Item); ok {
+			e.World().RemoveEntity(e)
+		}
+	}
+	if _, c := p.Combat(); c {
+		p.World().AddEntity(NewLightning(p.Position()))
+	}
+	p.SetCombat(0)
+
+	player.Inventory().Clear()
+	player.Armour().Clear()
+
+	p.AddToWorld(p.Server().World())
+	p.RemoveAllEffects()
+	p.Player().Heal(player.MaxHealth(), healing.SourceCustom{})
+	p.SetFFA(nil)
+	p.Player().Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§eFFA - Unranked"))
+}
