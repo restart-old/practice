@@ -1,15 +1,18 @@
 package custom
 
 import (
+	"math"
 	"time"
 
 	"github.com/df-mc/dragonfly/server/cmd"
+	"github.com/df-mc/dragonfly/server/entity/damage"
 	"github.com/df-mc/dragonfly/server/entity/healing"
 	"github.com/df-mc/dragonfly/server/item"
 	"github.com/df-mc/dragonfly/server/item/tool"
 	"github.com/df-mc/dragonfly/server/player"
 	"github.com/df-mc/dragonfly/server/world"
 	"github.com/df-plus/ffa"
+	"github.com/df-plus/kit"
 	"github.com/go-gl/mathgl/mgl64"
 )
 
@@ -136,8 +139,47 @@ func (p *Player) AddToWorld(w *world.World) {
 	p.player.Teleport(w.Spawn().Vec3())
 }
 
-// Spawn
+// Kill
+func (p *Player) Kill(src damage.Source) {
+	switch src := src.(type) {
 
+	case damage.SourceEntityAttack:
+		p.Spawn()
+
+		player, ok := p.Server().PlayerByName(src.Attacker.Name())
+		if !ok {
+			return
+		}
+		player.SetCombat(0)
+		player.ReKit()
+	default:
+		p.Spawn()
+	}
+}
+
+// ReKit
+func (p *Player) ReKit() {
+	player := p.Player()
+	if t, ok := p.Combat(); ok {
+		player.Messagef("§cYou're still in combat for %v seconds", math.Round(time.Until(t).Seconds()))
+		return
+	}
+	player.Heal(player.MaxHealth(), healing.SourceCustom{})
+
+	player.Inventory().Clear()
+	player.Armour().Clear()
+
+	k, ok := p.FFA()
+	if !ok {
+		player.Messagef("§cYou're not in any FFA, teleported to spawn")
+		p.Spawn()
+		return
+	}
+	kit.GiveKit(player, k.Kit())
+
+}
+
+// Spawn ...
 func (p *Player) Spawn() {
 	player := p.player
 
