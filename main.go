@@ -76,8 +76,6 @@ func logger() *logrus.Logger {
 func handleJoin(p *custom.Player) {
 	p.Player().SetGameMode(gamemode{})
 
-	p.Player().Inventory().Handle(handler.NewInventoryHandler(p))
-
 	h := moreHandlers.NewPlayerHandler()
 	p.Player().Handle(h)
 
