@@ -57,7 +57,6 @@ github.com/df-mc/dragonfly v0.4.3-0.20211219122229-c554b85cd881/go.mod h1:saPioT
 github.com/df-mc/dragonfly v0.4.3-0.20211228034935-5c6150017867/go.mod h1:saPioTIQPe/rDjVCbwkPie95qBuFilmreqZJM3HylOo=
 github.com/df-mc/dragonfly v0.5.2-0.20220108220621-5a51ed6d4919/go.mod h1:n/ZtuBD7m9RilP4alZ3B8T93ZWnGF7ZEpTJ4zbyePZw=
 github.com/df-mc/dragonfly v0.5.2-0.20220109181251-135829d473dd/go.mod h1:GvfWpA+e+/fh1JO7ysygJAvnCH5X0Z6gUfSI7y37mkA=
-github.com/df-mc/dragonfly v0.5.2-0.20220113172605-39265eb1c403 h1:5IlvlSiV0RPjsFRW+wOKl6q47Kx6bkg3eAnyaMHYU+M=
 github.com/df-mc/dragonfly v0.5.2-0.20220113172605-39265eb1c403/go.mod h1:GvfWpA+e+/fh1JO7ysygJAvnCH5X0Z6gUfSI7y37mkA=
 github.com/df-mc/dragonfly v0.5.2-0.20220114040157-109474c3adac h1:hpDo/6DkEdf63QtffYT/Smlh4fiM5PjICr+ahQ7vEhw=
 github.com/df-mc/dragonfly v0.5.2-0.20220114040157-109474c3adac/go.mod h1:GvfWpA+e+/fh1JO7ysygJAvnCH5X0Z6gUfSI7y37mkA=
@@ -67,7 +66,6 @@ github.com/df-plus/ffa v0.0.0-20220114024356-01dd45bfd211 h1:q4wbE2mPxeT0Cr1c/Ki
 github.com/df-plus/ffa v0.0.0-20220114024356-01dd45bfd211/go.mod h1:ntddtzUH3neDkFIESG3BoFHbFSkVTnxYEL1WFp0jLc4=
 github.com/df-plus/items v0.0.0-20220109233307-86aeb008f711 h1:JgxJeUcAVZeXv90t22OLFBtDwOJdRwmJL0CE0u3dc/I=
 github.com/df-plus/items v0.0.0-20220109233307-86aeb008f711/go.mod h1:ZZH8UyW1xL5gG/rRmAWPEElkLZnQ5oRTWXFSYDmx85c=
-github.com/df-plus/kit v0.0.0-20220114021008-be6741538fec h1:vPixlX/mm0xfdk8jY8jS9YBNQrGZGLqiGoEXsQEl6xQ=
 github.com/df-plus/kit v0.0.0-20220114021008-be6741538fec/go.mod h1:DViycFFLIlYSfSoUmnB08FZNOiDLpw5wUaViiRWAhSo=
 github.com/df-plus/kit v0.0.0-20220114033159-ad625b238a90 h1:lanTw9tSB73qIXjqYXMa1di8/60rpfMS0Qvb8ISSKXk=
 github.com/df-plus/kit v0.0.0-20220114033159-ad625b238a90/go.mod h1:DViycFFLIlYSfSoUmnB08FZNOiDLpw5wUaViiRWAhSo=

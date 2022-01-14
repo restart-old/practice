@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"Practice/custom"
 	"fmt"
+
+	"github.com/RestartFU/practice/custom"
 
 	"github.com/df-mc/dragonfly/server/entity/damage"
 	"github.com/df-mc/dragonfly/server/entity/healing"

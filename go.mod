@@ -1,4 +1,4 @@
-module Practice
+module github.com/RestartFU/practice
 
 go 1.17
 

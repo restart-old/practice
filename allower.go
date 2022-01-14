@@ -1,8 +1,9 @@
 package main
 
 import (
-	"Practice/custom"
 	"net"
+
+	"github.com/RestartFU/practice/custom"
 
 	"github.com/sandertv/gophertunnel/minecraft/protocol/login"
 )

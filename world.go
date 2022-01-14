@@ -1,9 +1,10 @@
 package main
 
 import (
-	"Practice/custom"
-	"Practice/handler"
 	"log"
+
+	"github.com/RestartFU/practice/custom"
+	"github.com/RestartFU/practice/handler"
 
 	"github.com/df-mc/dragonfly/server/world"
 )

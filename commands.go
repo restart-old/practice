@@ -1,8 +1,9 @@
 package main
 
 import (
-	"Practice/commands"
-	"Practice/custom"
+	"github.com/RestartFU/practice/custom"
+
+	"github.com/RestartFU/practice/commands"
 
 	"github.com/RestartFU/list"
 	"github.com/df-mc/dragonfly/server/cmd"

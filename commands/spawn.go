@@ -1,9 +1,10 @@
 package commands
 
 import (
-	"Practice/custom"
 	"math"
 	"time"
+
+	"github.com/RestartFU/practice/custom"
 
 	"github.com/df-mc/dragonfly/server/cmd"
 	"github.com/df-mc/dragonfly/server/entity/damage"

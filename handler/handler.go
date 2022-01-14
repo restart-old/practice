@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"Practice/custom"
+	"github.com/RestartFU/practice/custom"
 
 	"github.com/df-mc/dragonfly/server/item/inventory"
 	"github.com/df-mc/dragonfly/server/player"
