@@ -21,6 +21,10 @@ func (h *PlayerHandler) HandleHurt(ctx *event.Context, d *float64, src damage.So
 		}
 	})
 
+	if attSrc, ok := src.(damage.SourceEntityAttack); ok {
+		h.p.SetLastHurt(attSrc.Attacker)
+	}
+
 	switch src.(type) {
 	case damage.SourceFall:
 		ctx.Cancel()

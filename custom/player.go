@@ -1,6 +1,7 @@
 package custom
 
 import (
+	"fmt"
 	"math"
 	"time"
 
@@ -10,6 +11,7 @@ import (
 	"github.com/df-mc/dragonfly/server/item"
 	"github.com/df-mc/dragonfly/server/item/tool"
 	"github.com/df-mc/dragonfly/server/player"
+	"github.com/df-mc/dragonfly/server/player/chat"
 	"github.com/df-mc/dragonfly/server/world"
 	"github.com/df-plus/ffa"
 	"github.com/df-plus/kit"
@@ -26,6 +28,8 @@ type Player struct {
 	pearlCD time.Time
 	chatCD  time.Time
 	combat  time.Time
+
+	lastHurt world.Entity
 
 	ffa ffa.FFA
 }
@@ -120,6 +124,14 @@ func (p *Player) AddCombo(n int) { p.combo += n }
 // Combo ...
 func (p *Player) Combo() int { return p.combo }
 
+// LastHurt ...
+func (p *Player) LastHurt() (world.Entity, bool) { return p.lastHurt, p.lastHurt != nil }
+
+// SetLastHurt
+func (p *Player) SetLastHurt(e world.Entity) {
+	p.lastHurt = e
+}
+
 // RemoveAllEffects ...
 func (p *Player) RemoveAllEffects() {
 	for _, e := range p.Player().Effects() {
@@ -135,8 +147,10 @@ func (p *Player) WouldDie(damage float64) bool {
 // AddToWorld ...
 func (p *Player) AddToWorld(w *world.World) {
 	p.player.World().RemoveEntity(p.player)
-	w.AddEntity(p.player)
-	p.player.Teleport(w.Spawn().Vec3())
+	time.AfterFunc(1, func() {
+		w.AddEntity(p.player)
+		p.player.Teleport(w.Spawn().Vec3())
+	})
 }
 
 // Kill ...
@@ -144,6 +158,7 @@ func (p *Player) Kill(src damage.Source) {
 	switch src := src.(type) {
 
 	case damage.SourceEntityAttack:
+		chat.Global.WriteString(fmt.Sprintf("§e%s §7was slain by §e%s", p.Name(), src.Attacker.Name()))
 		p.Spawn()
 
 		player, ok := p.Server().PlayerByName(src.Attacker.Name())
