@@ -1,10 +1,12 @@
 package main
 
 import (
-	"Practice/custom"
-	"Practice/ffas"
 	"fmt"
 	"strings"
+
+	"github.com/RestartFU/practice/ffas"
+
+	"github.com/RestartFU/practice/custom"
 
 	"github.com/df-mc/dragonfly/server/item"
 	"github.com/df-mc/dragonfly/server/item/tool"

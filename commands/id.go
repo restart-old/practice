@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"Practice/custom"
+	"github.com/RestartFU/practice/custom"
 
 	"github.com/df-mc/dragonfly/server/cmd"
 	"github.com/df-mc/dragonfly/server/world"

@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"Practice/ffas"
 	"time"
+
+	"github.com/RestartFU/practice/ffas"
 
 	"github.com/df-mc/dragonfly/server/entity/damage"
 	"github.com/df-mc/dragonfly/server/event"

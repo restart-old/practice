@@ -1,8 +1,9 @@
 package kits
 
 import (
-	"Practice/custom"
 	"time"
+
+	"github.com/RestartFU/practice/custom"
 
 	"github.com/df-mc/dragonfly/server/entity/effect"
 	"github.com/df-mc/dragonfly/server/item"

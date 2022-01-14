@@ -1,9 +1,11 @@
 package ffas
 
 import (
-	"Practice/custom"
-	"Practice/kits"
 	"fmt"
+
+	"github.com/RestartFU/practice/kits"
+
+	"github.com/RestartFU/practice/custom"
 
 	"github.com/df-mc/dragonfly/server/world"
 	"github.com/df-plus/kit"

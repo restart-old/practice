@@ -1,10 +1,11 @@
 package main
 
 import (
-	"Practice/custom"
-	"Practice/ffas"
-	"Practice/handler"
-	"Practice/kits"
+	"github.com/RestartFU/practice/custom"
+
+	"github.com/RestartFU/practice/ffas"
+	"github.com/RestartFU/practice/handler"
+	"github.com/RestartFU/practice/kits"
 
 	"github.com/RestartFU/gophig"
 	"github.com/df-mc/dragonfly/server"

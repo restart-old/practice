@@ -1,9 +1,10 @@
 package handler
 
 import (
-	"Practice/custom"
 	"math"
 	"time"
+
+	"github.com/RestartFU/practice/custom"
 
 	"github.com/df-mc/dragonfly/server/event"
 )
