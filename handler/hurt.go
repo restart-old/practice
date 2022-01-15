@@ -15,7 +15,7 @@ func (h *PlayerHandler) HandleHurt(ctx *event.Context, d *float64, src damage.So
 			if ffa, ok := h.p.FFA(); ok {
 				switch ffa.(type) {
 				case ffas.Fist:
-					h.p.Player().SetAttackImmunity(450 * time.Millisecond)
+					h.p.SetAttackImmunity(450 * time.Millisecond)
 				}
 			}
 		}
@@ -32,7 +32,7 @@ func (h *PlayerHandler) HandleHurt(ctx *event.Context, d *float64, src damage.So
 	case damage.SourceFall:
 		ctx.Cancel()
 	default:
-		if h.p.WouldDie(h.p.Player().FinalDamageFrom(*d, src)) {
+		if h.p.WouldDie(h.p.FinalDamageFrom(*d, src)) {
 			h.p.Kill(src)
 			ctx.Cancel()
 		} else {

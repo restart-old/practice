@@ -15,7 +15,7 @@ func IDRunnable(server *custom.Server) cmd.Runnable { return ID{server: server} 
 
 func (ID) Run(src cmd.Source, o *cmd.Output) {
 	if p, ok := src.(*custom.Player); ok {
-		heldItem, _ := p.Player().HeldItems()
+		heldItem, _ := p.HeldItems()
 		if heldItem.Empty() {
 			o.Error("The item you're currently holding is not registered")
 			return
@@ -26,7 +26,7 @@ func (ID) Run(src cmd.Source, o *cmd.Output) {
 			o.Error("The item you're currently holding is not registered")
 			return
 		}
-		p.Player().Messagef("%v:%v", rid, meta)
+		p.Messagef("%v:%v", rid, meta)
 	}
 }
 func (i ID) Allow(src cmd.Source) bool {

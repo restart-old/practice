@@ -60,8 +60,8 @@ func main() {
 		if err != nil {
 			return
 		}
-		p.Player().Inventory().Clear()
-		p.Player().Armour().Clear()
+		p.Inventory().Clear()
+		p.Armour().Clear()
 		go handleJoin(p)
 	}
 
@@ -74,14 +74,14 @@ func logger() *logrus.Logger {
 	return log
 }
 func handleJoin(p *custom.Player) {
-	p.Player().SetGameMode(gamemode{})
+	p.SetGameMode(gamemode{})
 
 	h := moreHandlers.NewPlayerHandler()
-	p.Player().Handle(h)
+	p.Handle(h)
 
 	h.AddHandler(handler.NewPlayerHandler(p))
-	h.AddHandler(items.NewPlayerHandler(p.Player()))
+	h.AddHandler(items.NewPlayerHandler(p.Player))
 	h.AddHandler(handler_combo.NewComboHandler(p))
 
-	p.Player().Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§eFFA - Unranked"))
+	p.Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§eFFA - Unranked"))
 }

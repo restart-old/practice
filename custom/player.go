@@ -4,7 +4,6 @@ import (
 	"math"
 	"time"
 
-	"github.com/df-mc/dragonfly/server/cmd"
 	"github.com/df-mc/dragonfly/server/entity/damage"
 	"github.com/df-mc/dragonfly/server/entity/healing"
 	"github.com/df-mc/dragonfly/server/item"
@@ -15,12 +14,11 @@ import (
 	"github.com/df-plus/cooldown"
 	"github.com/df-plus/ffa"
 	"github.com/df-plus/kit"
-	"github.com/go-gl/mathgl/mgl64"
 )
 
 type Player struct {
-	player *player.Player
-	s      *Server
+	*player.Player
+	s *Server
 
 	combo int
 	cps   int
@@ -34,24 +32,10 @@ type Player struct {
 
 // NewPlayer returns a new *Player.
 func NewPlayer(p *player.Player, s *Server) *Player {
-	cPlayer := &Player{player: p, s: s, cdManager: cooldown.NewManager()}
+	cPlayer := &Player{Player: p, s: s, cdManager: cooldown.NewManager()}
 	s.AddPlayer(cPlayer)
 	return cPlayer
 }
-
-// Name ...
-func (p *Player) Name() string { return p.player.Name() }
-
-// Position ...
-func (p *Player) Position() mgl64.Vec3 { return p.player.Position() }
-
-// SendCommandOutput ...
-func (p *Player) SendCommandOutput(output *cmd.Output) {
-	p.player.SendCommandOutput(output)
-}
-
-// World ...
-func (p *Player) World() *world.World { return p.player.World() }
 
 // CDManager ...
 func (p *Player) CDManager() *cooldown.Manager { return p.cdManager }
@@ -70,9 +54,6 @@ func (p *Player) AddCPS(n int) {
 
 // CPS returns the current amount of cps of the player.
 func (p *Player) CPS() int { return p.cps }
-
-// Player returns the *player.Player of the *Player.
-func (p *Player) Player() *player.Player { return p.player }
 
 // Operator returns a bool of if the player is an operator or not.
 func (p *Player) Operator() bool { return p.Server().operators.Listed(p.Name()) }
@@ -108,23 +89,24 @@ func (p *Player) SetLastHurt(e world.Entity) {
 
 // RemoveAllEffects ...
 func (p *Player) RemoveAllEffects() {
-	for _, e := range p.Player().Effects() {
-		p.Player().RemoveEffect(e.Type())
+	for _, e := range p.Effects() {
+		p.RemoveEffect(e.Type())
 	}
 }
 
 // WouldDie ...
 func (p *Player) WouldDie(damage float64) bool {
-	return p.Player().Health()-damage <= 0
+	return p.Health()-damage <= 0
 }
 
 // AddToWorld ...
 func (p *Player) AddToWorld(w *world.World) {
-	p.player.World().RemoveEntity(p.player)
-	time.AfterFunc(1, func() {
-		w.AddEntity(p.player)
-		p.player.Teleport(w.Spawn().Vec3())
-	})
+	if p == nil || p.Player == nil || w == nil {
+		return
+	}
+	p.World().RemoveEntity(p.Player)
+	w.AddEntity(p.Player)
+	p.Teleport(w.Spawn().Vec3())
 }
 
 func (p *Player) CombatCD() *cooldown.Cooldown { return p.cdManager.Cooldown("combat_logger") }
@@ -133,24 +115,22 @@ func (p *Player) PearlCD() *cooldown.Cooldown  { return p.cdManager.Cooldown("en
 
 // Kill ...
 func (p *Player) Kill(src damage.Source) {
-	if src == nil {
-		return
-	}
-	if p == nil {
+	if src == nil && p == nil || p.Player == nil {
 		return
 	}
 	switch src := src.(type) {
-
 	case damage.SourceEntityAttack:
+		if src.Attacker == nil {
+			return
+		}
 		player, ok := p.Server().PlayerByName(src.Attacker.Name())
 		if !ok {
 			return
 		}
-		if m, ok := MessageFFA(p, player.player); ok {
+		if m, ok := MessageFFA(p, player.Player); ok {
 			chat.Global.WriteString(m)
 		}
 		player.CombatCD().SetCooldown(0)
-
 		player.ReKit()
 		p.Spawn()
 	default:
@@ -160,52 +140,44 @@ func (p *Player) Kill(src damage.Source) {
 
 // ReKit ...
 func (p *Player) ReKit() {
-	if p == nil {
+	if p == nil || p.Player == nil {
 		return
 	}
-	player := p.Player()
 	if cd := p.CombatCD(); !cd.Expired() {
-		player.Messagef("§cYou're still in combat for %v seconds", math.Round(cd.UntilExpiration().Seconds()))
+		p.Messagef("§cYou're still in combat for %v seconds", math.Round(cd.UntilExpiration().Seconds()))
 		return
 	}
-	player.Heal(player.MaxHealth(), healing.SourceCustom{})
+	p.Heal(p.MaxHealth(), healing.SourceCustom{})
 
-	player.Inventory().Clear()
-	player.Armour().Clear()
+	p.Inventory().Clear()
+	p.Armour().Clear()
 
 	k, ok := p.FFA()
 	if !ok {
-		player.Messagef("§cYou're not in any FFA, teleported to spawn")
+		p.Messagef("§cYou're not in any FFA, teleported to spawn")
 		p.Spawn()
 		return
 	}
-	kit.GiveKit(player, k.Kit())
+	kit.GiveKit(p.Player, k.Kit())
 
 }
 
 // Spawn ...
 func (p *Player) Spawn() {
-	if p == nil {
+	if p == nil || p.Player == nil || p.World() == nil {
 		return
-	}
-	player := p.player
-
-	for _, e := range p.World().Entities() {
-		if _, ok := e.(world.Item); ok {
-			e.World().RemoveEntity(e)
-		}
 	}
 	if cd := p.CombatCD(); !cd.Expired() {
 		p.World().AddEntity(NewLightning(p.Position()))
 		cd.SetCooldown(0)
 	}
 
-	player.Inventory().Clear()
-	player.Armour().Clear()
+	p.Inventory().Clear()
+	p.Armour().Clear()
 
 	p.AddToWorld(p.Server().World())
 	p.RemoveAllEffects()
-	p.Player().Heal(player.MaxHealth(), healing.SourceCustom{})
+	p.Heal(p.MaxHealth(), healing.SourceCustom{})
 	p.SetFFA(nil)
-	p.Player().Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§eFFA - Unranked"))
+	p.Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§eFFA - Unranked"))
 }

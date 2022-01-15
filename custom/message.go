@@ -35,7 +35,7 @@ func MessageFFA(p *Player, p1 *player.Player) (string, bool) {
 	}
 	switch ffa.Name() {
 	case "NoDebuff":
-		return fmt.Sprintf(deathInventory, p.Name(), ItemInInv(item.SplashPotion{}, p.player), p1.Name(), ItemInInv(item.SplashPotion{}, p1)), true
+		return fmt.Sprintf(deathInventory, p.Name(), ItemInInv(item.SplashPotion{}, p.Player), p1.Name(), ItemInInv(item.SplashPotion{}, p1)), true
 	default:
 		return fmt.Sprintf(deathNoInventory, p.Name(), p1.Name()), true
 	}

@@ -17,7 +17,7 @@ func GamemodeRunnable(server *custom.Server) cmd.Runnable { return Gamemode{serv
 func (g Gamemode) Run(src cmd.Source, o *cmd.Output) {
 	if p, ok := src.(*custom.Player); ok {
 		if gm, ok := gms[g.Gamemode]; ok {
-			p.Player().SetGameMode(gm)
+			p.SetGameMode(gm)
 		}
 	}
 }

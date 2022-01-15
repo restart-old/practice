@@ -17,10 +17,10 @@ func (op BAN) Run(src cmd.Source, output *cmd.Output) {
 	if p, ok := src.(*custom.Player); ok {
 
 		if target, ok := op.server.PlayerByName(op.Player); ok {
-			target.Player().Disconnect("You are now banned")
+			target.Disconnect("You are now banned")
 		}
 		p.Server().Ban().Add(op.Player)
-		p.Player().Messagef("%s is now banned", op.Player)
+		p.Messagef("%s is now banned", op.Player)
 	}
 }
 
@@ -39,7 +39,7 @@ func (op UNBAN) Run(src cmd.Source, output *cmd.Output) {
 	if p, ok := src.(*custom.Player); ok {
 		if p.Server().Ban().Listed(op.Player) {
 			p.Server().Ban().Remove(op.Player)
-			p.Player().Messagef("%s is no longer banned", op.Player)
+			p.Messagef("%s is no longer banned", op.Player)
 		} else {
 			output.Errorf("player %s is not banned", op.Player)
 		}

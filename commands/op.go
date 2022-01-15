@@ -16,7 +16,7 @@ func OPRunnable(server *custom.Server) cmd.Runnable { return OP{server: server} 
 func (op OP) Run(src cmd.Source, output *cmd.Output) {
 	if p, ok := src.(*custom.Player); ok {
 		p.Server().Operators().Add(op.Player)
-		p.Player().Messagef("%s is now OP", op.Player)
+		p.Messagef("%s is now OP", op.Player)
 	}
 }
 
@@ -34,7 +34,7 @@ func DEOPRunnable(server *custom.Server) cmd.Runnable { return DEOP{server: serv
 func (op DEOP) Run(src cmd.Source, output *cmd.Output) {
 	if p, ok := src.(*custom.Player); ok {
 		p.Server().Operators().Remove(op.Player)
-		p.Player().Messagef("%s is no longer OP", op.Player)
+		p.Messagef("%s is no longer OP", op.Player)
 	}
 }
 

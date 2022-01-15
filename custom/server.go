@@ -87,7 +87,7 @@ func (s *Server) RemovePlayer(p *Player) {
 	s.playersMu.Lock()
 	defer s.playersMu.Unlock()
 
-	delete(s.players, p.player)
+	delete(s.players, p.Player)
 }
 
 // AddPlayer ...
@@ -95,7 +95,7 @@ func (s *Server) AddPlayer(p *Player) {
 	s.playersMu.Lock()
 	defer s.playersMu.Unlock()
 
-	s.players[p.player] = p
+	s.players[p.Player] = p
 }
 
 // Whitelist returns the whitelist of the server.

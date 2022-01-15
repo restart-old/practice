@@ -8,7 +8,7 @@ import (
 )
 
 func (h *PlayerHandler) HandleAttackEntity(ctx *event.Context, e world.Entity, force, height *float64, critical *bool) {
-	p := h.p.Player()
+	p := h.p
 	h.p.AddCPS(1)
 	p.SendTip(h.p.CPS())
 	if p.World() == h.p.Server().WorldManager().DefaultWorld() {
