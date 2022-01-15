@@ -12,6 +12,7 @@ import (
 	"github.com/df-mc/dragonfly/server/player"
 	"github.com/df-mc/dragonfly/server/player/chat"
 	"github.com/df-mc/dragonfly/server/world"
+	"github.com/df-plus/cooldown"
 	"github.com/df-plus/ffa"
 	"github.com/df-plus/kit"
 	"github.com/go-gl/mathgl/mgl64"
@@ -24,9 +25,7 @@ type Player struct {
 	combo int
 	cps   int
 
-	pearlCD time.Time
-	chatCD  time.Time
-	combat  time.Time
+	cdManager *cooldown.Manager
 
 	lastHurt world.Entity
 
@@ -35,7 +34,10 @@ type Player struct {
 
 // NewPlayer returns a new *Player.
 func NewPlayer(p *player.Player, s *Server) *Player {
-	cPlayer := &Player{player: p, s: s}
+	cPlayer := &Player{player: p, s: s, cdManager: cooldown.NewManager()}
+	cPlayer.cdManager.NewCooldown("ender_pearl")
+	cPlayer.cdManager.NewCooldown("combat_logger")
+	cPlayer.cdManager.NewCooldown("chat")
 	s.AddPlayer(cPlayer)
 	return cPlayer
 }
@@ -54,35 +56,11 @@ func (p *Player) SendCommandOutput(output *cmd.Output) {
 // World ...
 func (p *Player) World() *world.World { return p.player.World() }
 
+// CDManager ...
+func (p *Player) CDManager() *cooldown.Manager { return p.cdManager }
+
 // Server returns the *custom.Server of the player.
 func (p *Player) Server() *Server { return p.s }
-
-// Combat returns the last time the user was in combat,
-// and if the player is still in combat cooldown.
-func (p *Player) Combat() (time.Time, bool) {
-	return p.combat, p.combat.After(time.Now())
-}
-
-// Combat sets the combat for the player with the duration passed.
-func (p *Player) SetCombat(d time.Duration) { p.combat = time.Now().Add(d) }
-
-// PearlCD returns the last time the user threw a pearl,
-// and if the player is still on pearl cooldown.
-func (p *Player) PearlCD() (time.Time, bool) {
-	return p.pearlCD, p.pearlCD.After(time.Now())
-}
-
-// SetPearlCD sets the pearl cooldown for the player with the duration passed.
-func (p *Player) SetPearlCD(d time.Duration) { p.pearlCD = time.Now().Add(d) }
-
-// SetChatCD sets the chat cooldown for the player with the duration passed.
-func (p *Player) SetChatCD(d time.Duration) { p.chatCD = time.Now().Add(d) }
-
-// ChatCD returns the last time the user sent a message,
-// and if the player is still on chat cooldown.
-func (p *Player) ChatCD() (time.Time, bool) {
-	return p.chatCD, p.chatCD.After(time.Now())
-}
 
 // AddCPS adds the int passed to the player cps,
 // and removes that same amount a second after.
@@ -152,6 +130,10 @@ func (p *Player) AddToWorld(w *world.World) {
 	})
 }
 
+func (p *Player) CombatCD() (*cooldown.Cooldown, bool) { return p.cdManager.Cooldown("combat_logger") }
+func (p *Player) ChatCD() (*cooldown.Cooldown, bool)   { return p.cdManager.Cooldown("chat") }
+func (p *Player) PearlCD() (*cooldown.Cooldown, bool)  { return p.cdManager.Cooldown("ender_pearl") }
+
 // Kill ...
 func (p *Player) Kill(src damage.Source) {
 	if src == nil {
@@ -170,7 +152,9 @@ func (p *Player) Kill(src damage.Source) {
 		if m, ok := MessageFFA(p, player.player); ok {
 			chat.Global.WriteString(m)
 		}
-		player.SetCombat(0)
+		if combat, ok := player.CombatCD(); ok {
+			combat.SetCooldown(0)
+		}
 		player.ReKit()
 		p.Spawn()
 	default:
@@ -184,8 +168,8 @@ func (p *Player) ReKit() {
 		return
 	}
 	player := p.Player()
-	if t, ok := p.Combat(); ok {
-		player.Messagef("§cYou're still in combat for %v seconds", math.Round(time.Until(t).Seconds()))
+	if cd, ok := p.CombatCD(); ok && !cd.Expired() {
+		player.Messagef("§cYou're still in combat for %v seconds", math.Round(cd.UntilExpiration().Seconds()))
 		return
 	}
 	player.Heal(player.MaxHealth(), healing.SourceCustom{})
@@ -215,10 +199,10 @@ func (p *Player) Spawn() {
 			e.World().RemoveEntity(e)
 		}
 	}
-	if _, c := p.Combat(); c {
+	if cd, c := p.CombatCD(); c && !cd.Expired() {
 		p.World().AddEntity(NewLightning(p.Position()))
+		cd.SetCooldown(0)
 	}
-	p.SetCombat(0)
 
 	player.Inventory().Clear()
 	player.Armour().Clear()

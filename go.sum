@@ -62,6 +62,14 @@ github.com/df-mc/dragonfly v0.5.2-0.20220114180301-3f677d1e0f28 h1:6/+UtN1y4vpXA
 github.com/df-mc/dragonfly v0.5.2-0.20220114180301-3f677d1e0f28/go.mod h1:GvfWpA+e+/fh1JO7ysygJAvnCH5X0Z6gUfSI7y37mkA=
 github.com/df-mc/goleveldb v1.1.9 h1:ihdosZyy5jkQKrxucTQmN90jq/2lUwQnJZjIYIC/9YU=
 github.com/df-mc/goleveldb v1.1.9/go.mod h1:+NHCup03Sci5q84APIA21z3iPZCuk6m6ABtg4nANCSk=
+github.com/df-plus/cooldown v0.0.0-20220115084413-bd6e7a62bbb5 h1:qsck5hAO6T/kjr7slfm0/OZOKNxJ3KpSOt2Dp2D9b1s=
+github.com/df-plus/cooldown v0.0.0-20220115084413-bd6e7a62bbb5/go.mod h1:4F3K44mt58v6Oi0VOJZq2QMFclM1yP9hw8HTp4nnnR0=
+github.com/df-plus/cooldown v0.0.0-20220115085532-3a0f77ecebf5 h1:dR0vU9uLFGtclXoSmnyNx376aQZjFTA1pj/C1dQaus4=
+github.com/df-plus/cooldown v0.0.0-20220115085532-3a0f77ecebf5/go.mod h1:4F3K44mt58v6Oi0VOJZq2QMFclM1yP9hw8HTp4nnnR0=
+github.com/df-plus/cooldown v0.0.0-20220115085649-69e02b487d17 h1:Ryu15WCFlWFdv/9DGpkyd1H+Xld8CdrAaCxxpkaHspo=
+github.com/df-plus/cooldown v0.0.0-20220115085649-69e02b487d17/go.mod h1:4F3K44mt58v6Oi0VOJZq2QMFclM1yP9hw8HTp4nnnR0=
+github.com/df-plus/cooldown v0.0.0-20220115090100-9ef1e6259959 h1:DCZ5T6R40fQwfYbEGQjERSDcwwMc2rFBxOGQw0z4zFs=
+github.com/df-plus/cooldown v0.0.0-20220115090100-9ef1e6259959/go.mod h1:4F3K44mt58v6Oi0VOJZq2QMFclM1yP9hw8HTp4nnnR0=
 github.com/df-plus/ffa v0.0.0-20220114024356-01dd45bfd211 h1:q4wbE2mPxeT0Cr1c/KiKf5Da2xgSfTj5oCU7RMCnXtw=
 github.com/df-plus/ffa v0.0.0-20220114024356-01dd45bfd211/go.mod h1:ntddtzUH3neDkFIESG3BoFHbFSkVTnxYEL1WFp0jLc4=
 github.com/df-plus/items v0.0.0-20220109233307-86aeb008f711 h1:JgxJeUcAVZeXv90t22OLFBtDwOJdRwmJL0CE0u3dc/I=
