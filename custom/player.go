@@ -1,7 +1,6 @@
 package custom
 
 import (
-	"fmt"
 	"math"
 	"time"
 
@@ -155,18 +154,25 @@ func (p *Player) AddToWorld(w *world.World) {
 
 // Kill ...
 func (p *Player) Kill(src damage.Source) {
+	if src == nil {
+		return
+	}
+	if p == nil {
+		return
+	}
 	switch src := src.(type) {
 
 	case damage.SourceEntityAttack:
-		chat.Global.WriteString(fmt.Sprintf("§e%s §7was slain by §e%s", p.Name(), src.Attacker.Name()))
-		p.Spawn()
-
 		player, ok := p.Server().PlayerByName(src.Attacker.Name())
 		if !ok {
 			return
 		}
+		if m, ok := MessageFFA(p, player.player); ok {
+			chat.Global.WriteString(m)
+		}
 		player.SetCombat(0)
 		player.ReKit()
+		p.Spawn()
 	default:
 		p.Spawn()
 	}
@@ -174,6 +180,9 @@ func (p *Player) Kill(src damage.Source) {
 
 // ReKit ...
 func (p *Player) ReKit() {
+	if p == nil {
+		return
+	}
 	player := p.Player()
 	if t, ok := p.Combat(); ok {
 		player.Messagef("§cYou're still in combat for %v seconds", math.Round(time.Until(t).Seconds()))
@@ -196,6 +205,9 @@ func (p *Player) ReKit() {
 
 // Spawn ...
 func (p *Player) Spawn() {
+	if p == nil {
+		return
+	}
 	player := p.player
 
 	for _, e := range p.World().Entities() {

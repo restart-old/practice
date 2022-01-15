@@ -26,6 +26,9 @@ func (h *PlayerHandler) HandleHurt(ctx *event.Context, d *float64, src damage.So
 	}
 
 	switch src.(type) {
+	case damage.SourceVoid:
+		h.p.Kill(src)
+		ctx.Cancel()
 	case damage.SourceFall:
 		ctx.Cancel()
 	default:

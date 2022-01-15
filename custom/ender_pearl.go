@@ -97,7 +97,7 @@ func (e *EnderPearl) Tick(w *world.World, current int64) {
 		if r, ok := result.(trace.EntityResult); ok {
 			if l, ok := r.Entity().(entity.Living); ok {
 				if _, vulnerable := l.Hurt(0.0, damage.SourceEntityAttack{Attacker: e}); vulnerable {
-					l.KnockBack(m.Position(), 0.45, 0.3608)
+					l.KnockBack(m.Position(), 0.398, 0.405)
 				}
 			}
 		}
