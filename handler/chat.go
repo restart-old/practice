@@ -15,12 +15,13 @@ func (h PlayerHandler) HandleChat(ctx *event.Context, message *string) {
 	if !h.p.Operator() && strings.Contains("discord.gg/", *message) {
 		return
 	}
-	if t, ok := h.p.ChatCD(); ok {
-		h.p.Player().Messagef("You're on chat cooldown for %v seconds", math.Round(time.Until(t).Seconds()))
+	if cd, ok := h.p.ChatCD(); ok && !cd.Expired() {
+		h.p.Player().Messagef("You're on chat cooldown for %v seconds", math.Round(cd.UntilExpiration().Seconds()))
 		return
-	}
-	if !h.p.Operator() {
-		h.p.SetChatCD(3 * time.Second)
+	} else {
+		if !h.p.Operator() {
+			cd.SetCooldown(3 * time.Second)
+		}
 	}
 	chat.Global.WriteString(fmt.Sprintf("§e%s: §f%s", h.p.Name(), *message))
 }

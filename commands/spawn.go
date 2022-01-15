@@ -2,7 +2,6 @@ package commands
 
 import (
 	"math"
-	"time"
 
 	"github.com/RestartFU/practice/custom"
 
@@ -14,8 +13,8 @@ type SPAWN struct{}
 
 func (SPAWN) Run(src cmd.Source, out *cmd.Output) {
 	if p, ok := src.(*custom.Player); ok {
-		if t, ok := p.Combat(); ok {
-			out.Errorf("You're still in combat for %v seconds", math.Round(time.Until(t).Seconds()))
+		if cd, ok := p.CombatCD(); ok && !cd.Expired() {
+			out.Errorf("You're still in combat for %v seconds", math.Round(cd.UntilExpiration().Seconds()))
 			return
 		}
 		p.Player().Hurt(p.Player().MaxHealth(), damage.SourceCustom{})

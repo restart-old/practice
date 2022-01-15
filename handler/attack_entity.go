@@ -15,7 +15,9 @@ func (h *PlayerHandler) HandleAttackEntity(ctx *event.Context, e world.Entity, f
 		ctx.Cancel()
 		return
 	}
-	h.p.SetCombat(15 * time.Second)
+	if cd, ok := h.p.CombatCD(); ok {
+		cd.SetCooldown(15 * time.Second)
+	}
 
 	if h.p.CPS() >= 20 {
 		p.Message("§cYou're clicking too fast!")

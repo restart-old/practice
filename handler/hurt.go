@@ -36,7 +36,9 @@ func (h *PlayerHandler) HandleHurt(ctx *event.Context, d *float64, src damage.So
 			h.p.Kill(src)
 			ctx.Cancel()
 		} else {
-			h.p.SetCombat(15 * time.Second)
+			if cd, ok := h.p.CombatCD(); ok {
+				cd.SetCooldown(15 * time.Second)
+			}
 		}
 	}
 }
