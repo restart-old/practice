@@ -35,9 +35,6 @@ type Player struct {
 // NewPlayer returns a new *Player.
 func NewPlayer(p *player.Player, s *Server) *Player {
 	cPlayer := &Player{player: p, s: s, cdManager: cooldown.NewManager()}
-	cPlayer.cdManager.NewCooldown("ender_pearl")
-	cPlayer.cdManager.NewCooldown("combat_logger")
-	cPlayer.cdManager.NewCooldown("chat")
 	s.AddPlayer(cPlayer)
 	return cPlayer
 }
@@ -130,9 +127,9 @@ func (p *Player) AddToWorld(w *world.World) {
 	})
 }
 
-func (p *Player) CombatCD() (*cooldown.Cooldown, bool) { return p.cdManager.Cooldown("combat_logger") }
-func (p *Player) ChatCD() (*cooldown.Cooldown, bool)   { return p.cdManager.Cooldown("chat") }
-func (p *Player) PearlCD() (*cooldown.Cooldown, bool)  { return p.cdManager.Cooldown("ender_pearl") }
+func (p *Player) CombatCD() *cooldown.Cooldown { return p.cdManager.Cooldown("combat_logger") }
+func (p *Player) ChatCD() *cooldown.Cooldown   { return p.cdManager.Cooldown("chat") }
+func (p *Player) PearlCD() *cooldown.Cooldown  { return p.cdManager.Cooldown("ender_pearl") }
 
 // Kill ...
 func (p *Player) Kill(src damage.Source) {
@@ -152,9 +149,8 @@ func (p *Player) Kill(src damage.Source) {
 		if m, ok := MessageFFA(p, player.player); ok {
 			chat.Global.WriteString(m)
 		}
-		if combat, ok := player.CombatCD(); ok {
-			combat.SetCooldown(0)
-		}
+		player.CombatCD().SetCooldown(0)
+
 		player.ReKit()
 		p.Spawn()
 	default:
@@ -168,7 +164,7 @@ func (p *Player) ReKit() {
 		return
 	}
 	player := p.Player()
-	if cd, ok := p.CombatCD(); ok && !cd.Expired() {
+	if cd := p.CombatCD(); !cd.Expired() {
 		player.Messagef("§cYou're still in combat for %v seconds", math.Round(cd.UntilExpiration().Seconds()))
 		return
 	}
@@ -199,7 +195,7 @@ func (p *Player) Spawn() {
 			e.World().RemoveEntity(e)
 		}
 	}
-	if cd, c := p.CombatCD(); c && !cd.Expired() {
+	if cd := p.CombatCD(); !cd.Expired() {
 		p.World().AddEntity(NewLightning(p.Position()))
 		cd.SetCooldown(0)
 	}
