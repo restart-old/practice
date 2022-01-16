@@ -17,7 +17,7 @@ type NoDebuff struct {
 	server *custom.Server
 }
 
-func (NoDebuff) Name() string { return "NoDebuff" }
+func (NoDebuff) Name() string { return "§8NoDebuff" }
 func (ndbf NoDebuff) World() *world.World {
 	worldName := ndbf.Name()
 	w, ok := ndbf.server.WorldManager().World(worldName)

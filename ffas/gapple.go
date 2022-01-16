@@ -18,7 +18,7 @@ type Gapple struct {
 	server *custom.Server
 }
 
-func (Gapple) Name() string { return "Gapple" }
+func (Gapple) Name() string { return "§8Gapple" }
 func (gapple Gapple) World() *world.World {
 	worldName := gapple.Name()
 	w, ok := gapple.server.WorldManager().World(worldName)

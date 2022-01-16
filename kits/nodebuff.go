@@ -16,7 +16,7 @@ import (
 
 type NoDebuff struct{}
 
-func (NoDebuff) Name() string { return "NoDebuff" }
+func (NoDebuff) Name() string { return "§8NoDebuff" }
 func (NoDebuff) Items() kit.Items {
 	return kit.Items{
 		kit.Set{Slot: 0}: item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithEnchantments(enchantment.Unbreaking{}.WithLevel(10)),

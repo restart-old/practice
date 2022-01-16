@@ -10,7 +10,7 @@ import (
 
 type Fist struct{}
 
-func (Fist) Name() string { return "Fist" }
+func (Fist) Name() string { return "§8Fist" }
 func (Fist) Items() kit.Items {
 	return kit.Items{
 		kit.Set{Slot: 0}: item.NewStack(item.Beef{Cooked: true}, 16),

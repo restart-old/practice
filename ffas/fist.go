@@ -17,7 +17,7 @@ type Fist struct {
 	server *custom.Server
 }
 
-func (Fist) Name() string { return "Fist" }
+func (Fist) Name() string { return "§8Fist" }
 func (fist Fist) World() *world.World {
 	worldName := fist.Name()
 	w, ok := fist.server.WorldManager().World(worldName)

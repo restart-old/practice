@@ -10,7 +10,7 @@ import (
 
 type Gapple struct{}
 
-func (Gapple) Name() string { return "Gapple" }
+func (Gapple) Name() string { return "§8Gapple" }
 func (Gapple) Items() kit.Items {
 	return kit.Items{
 		kit.Set{Slot: 0}: item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithEnchantments(enchantment.Unbreaking{}.WithLevel(10)),
