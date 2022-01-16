@@ -16,7 +16,7 @@ func (h PlayerHandler) HandleChat(ctx *event.Context, message *string) {
 		return
 	}
 	cd := h.p.ChatCD()
-	if !!cd.Expired() {
+	if !cd.Expired() {
 		h.p.Messagef("You're on chat cooldown for %v seconds", math.Round(cd.UntilExpiration().Seconds()))
 		return
 	} else {
