@@ -3,23 +3,16 @@ package handler
 import (
 	"time"
 
-	"github.com/RestartFU/practice/ffas"
-
 	"github.com/df-mc/dragonfly/server/entity/damage"
 	"github.com/df-mc/dragonfly/server/event"
 )
 
 func (h *PlayerHandler) HandleHurt(ctx *event.Context, d *float64, src damage.Source) {
-	ctx.After(func(cancelled bool) {
-		if !cancelled {
-			if ffa, ok := h.p.FFA(); ok {
-				switch ffa.(type) {
-				case ffas.Fist:
-					h.p.SetAttackImmunity(450 * time.Millisecond)
-				}
-			}
+	if ffa, ok := h.p.FFA(); ok {
+		if delay, ok := ffa.(interface{ HitDelay() time.Duration }); ok {
+			h.p.SetAttackImmunity(delay.HitDelay())
 		}
-	})
+	}
 
 	if attSrc, ok := src.(damage.SourceEntityAttack); ok {
 		h.p.SetLastHurt(attSrc.Attacker)

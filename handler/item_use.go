@@ -12,9 +12,8 @@ import (
 func (h *PlayerHandler) HandleItemUse(ctx *event.Context) {
 	heldItem, _ := h.p.HeldItems()
 
-	// Pearl
-	pearl := custom.EnderPearItem{}
-	if heldItem.Item() == pearl {
+	switch heldItem.Item().(type) {
+	case custom.EnderPearItem:
 		if cd := h.p.PearlCD(); !cd.Expired() {
 			ctx.Cancel()
 			h.p.Messagef("§cYou're on pearl cooldown for %v seconds.", math.Round(cd.UntilExpiration().Seconds()))
@@ -23,4 +22,5 @@ func (h *PlayerHandler) HandleItemUse(ctx *event.Context) {
 			cd.SetCooldown(10 * time.Second)
 		}
 	}
+
 }

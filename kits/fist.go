@@ -28,3 +28,5 @@ func (Fist) Armour() [4]item.Stack {
 func (Fist) Effects() []effect.Effect {
 	return []effect.Effect{effect.New(effect.Resistance{}, 2, 30*time.Hour)}
 }
+
+func (Fist) HitDelay() time.Duration { return 450 * time.Millisecond }
