@@ -179,5 +179,5 @@ func (p *Player) Spawn() {
 	p.RemoveAllEffects()
 	p.Heal(p.MaxHealth(), healing.SourceCustom{})
 	p.SetFFA(nil)
-	p.Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§eFFA - Unranked"))
+	p.Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§r§eFree For All"))
 }

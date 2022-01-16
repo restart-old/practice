@@ -83,5 +83,5 @@ func handleJoin(p *custom.Player) {
 	h.AddHandler(items.NewPlayerHandler(p.Player))
 	h.AddHandler(handler_combo.NewComboHandler(p))
 
-	p.Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§eFFA - Unranked"))
+	p.Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§r§eFree For All"))
 }

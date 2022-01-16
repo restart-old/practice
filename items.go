@@ -42,22 +42,22 @@ func playersInWorldByName(name string, s *custom.Server) int {
 // newButton ...
 func newButton(name, texture string, s *custom.Server) form.Button {
 	players := playersInWorldByName(name, s)
-	return form.NewButton(fmt.Sprintf(name+"\n%v Player(s)", players), texture)
+	return form.NewButton(fmt.Sprintf(name+"\nPlaying: %v", players), texture)
 }
 
 // Name returns the name that the item must have for Use() to be ran.
-func (FFASword) Name() string { return "§eFFA - Unranked" }
+func (FFASword) Name() string { return "§r§eFree For All" }
 
 // Item returns the item that must be used.
 func (FFASword) Item() world.Item { return item.Sword{Tier: tool.TierDiamond} }
 
 // Use sends the from for the FFASword item.
 func (ffa FFASword) Use(s item.Stack, p *player.Player) {
-	nodebuff := newButton("NoDebuff", "textures/items/potion_bottle_splash_heal.png", ffa.server)
-	gapple := newButton("Gapple", "textures/items/apple_golden.png", ffa.server)
-	fist := newButton("Fist", "textures/items/beef_cooked.png", ffa.server)
+	nodebuff := newButton("§8NoDebuff", "textures/items/potion_bottle_splash_heal.png", ffa.server)
+	gapple := newButton("§8Gapple", "textures/items/apple_golden.png", ffa.server)
+	fist := newButton("§8Fist", "textures/items/beef_cooked.png", ffa.server)
 
-	f := form.NewMenu(FFASword{server: ffa.server}, "§eFFA - Unranked").WithButtons(
+	f := form.NewMenu(FFASword{server: ffa.server}, "Free For All").WithButtons(
 		nodebuff,
 		gapple,
 		fist,
