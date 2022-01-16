@@ -5,7 +5,7 @@ go 1.17
 require (
 	github.com/RestartFU/gophig v0.0.0-20220114004832-105ae125b823
 	github.com/RestartFU/list v0.0.0-20220114005014-9b91b47e9e9a
-	github.com/df-mc/dragonfly v0.5.2-0.20220114180301-3f677d1e0f28
+	github.com/df-mc/dragonfly v0.5.2-0.20220116173302-c8e78665d0e0
 	github.com/df-plus/cooldown v0.0.0-20220115224559-13b99656848c
 	github.com/df-plus/ffa v0.0.0-20220114024356-01dd45bfd211
 	github.com/df-plus/items v0.0.0-20220109233307-86aeb008f711
@@ -13,7 +13,7 @@ require (
 	github.com/df-plus/moreHandlers v0.0.0-20220109222938-3f9c21b0a1ef
 	github.com/df-plus/worldmanager v0.0.0-20220113163416-91cbee8d3cd9
 	github.com/go-gl/mathgl v1.0.0
-	github.com/sandertv/gophertunnel v1.18.1
+	github.com/sandertv/gophertunnel v1.18.2
 	github.com/sirupsen/logrus v1.8.1
 )
 

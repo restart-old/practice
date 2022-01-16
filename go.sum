@@ -60,6 +60,8 @@ github.com/df-mc/dragonfly v0.5.2-0.20220109181251-135829d473dd/go.mod h1:GvfWpA
 github.com/df-mc/dragonfly v0.5.2-0.20220113172605-39265eb1c403/go.mod h1:GvfWpA+e+/fh1JO7ysygJAvnCH5X0Z6gUfSI7y37mkA=
 github.com/df-mc/dragonfly v0.5.2-0.20220114180301-3f677d1e0f28 h1:6/+UtN1y4vpXASEd14g/fCBbWlCJn2yBXNlxE7/WfpI=
 github.com/df-mc/dragonfly v0.5.2-0.20220114180301-3f677d1e0f28/go.mod h1:GvfWpA+e+/fh1JO7ysygJAvnCH5X0Z6gUfSI7y37mkA=
+github.com/df-mc/dragonfly v0.5.2-0.20220116173302-c8e78665d0e0 h1:UALtXQEiXN24joFzTW0NKtHOs230NG0HEucWaVdQEZc=
+github.com/df-mc/dragonfly v0.5.2-0.20220116173302-c8e78665d0e0/go.mod h1:aov4hHqVhJVL8igcNcm2oixgYJYtBcjzxT5VDJuVJuQ=
 github.com/df-mc/goleveldb v1.1.9 h1:ihdosZyy5jkQKrxucTQmN90jq/2lUwQnJZjIYIC/9YU=
 github.com/df-mc/goleveldb v1.1.9/go.mod h1:+NHCup03Sci5q84APIA21z3iPZCuk6m6ABtg4nANCSk=
 github.com/df-plus/cooldown v0.0.0-20220115084413-bd6e7a62bbb5 h1:qsck5hAO6T/kjr7slfm0/OZOKNxJ3KpSOt2Dp2D9b1s=
@@ -188,6 +190,8 @@ github.com/sandertv/go-raknet v1.10.2/go.mod h1:s1lD7LTts74R9csTeI4WlGcp6PmXAGX+
 github.com/sandertv/gophertunnel v1.17.1/go.mod h1:cu9ZDQVTXY1RJO/te3syrPvCeCAzKt9eB4jkSzXljTw=
 github.com/sandertv/gophertunnel v1.18.1 h1:JHULaRk83QRY9/H8wmngU7HLGIaGse2cMaYpZl4xWfM=
 github.com/sandertv/gophertunnel v1.18.1/go.mod h1:cu9ZDQVTXY1RJO/te3syrPvCeCAzKt9eB4jkSzXljTw=
+github.com/sandertv/gophertunnel v1.18.2 h1:PlQ7v3LhdjmawXdiJe0MkZdNpn4p2hWkxBJB38KGZA4=
+github.com/sandertv/gophertunnel v1.18.2/go.mod h1:cu9ZDQVTXY1RJO/te3syrPvCeCAzKt9eB4jkSzXljTw=
 github.com/sirupsen/logrus v1.8.1 h1:dJKuHgqk1NNQlqoA6BTlM1Wf9DOH3NBjQyu0h9+AZZE=
 github.com/sirupsen/logrus v1.8.1/go.mod h1:yWOB1SBYBC5VeMP7gHvWumXLIWorT60ONWic61uBYv0=
 github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72 h1:qLC7fQah7D6K1B0ujays3HV9gkFtllcxhzImRR7ArPQ=

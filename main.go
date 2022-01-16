@@ -12,7 +12,6 @@ import (
 	"github.com/df-mc/dragonfly/server"
 	"github.com/df-mc/dragonfly/server/block/cube"
 	"github.com/df-mc/dragonfly/server/item"
-	"github.com/df-mc/dragonfly/server/item/tool"
 	"github.com/df-mc/dragonfly/server/player/chat"
 	"github.com/df-plus/items"
 	"github.com/df-plus/moreHandlers"
@@ -83,5 +82,5 @@ func handleJoin(p *custom.Player) {
 	h.AddHandler(items.NewPlayerHandler(p.Player))
 	h.AddHandler(handler_combo.NewComboHandler(p))
 
-	p.Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§r§eFree For All"))
+	p.Inventory().SetItem(0, item.NewStack(item.Sword{Tier: item.ToolTierDiamond}, 1).WithCustomName("§r§eFree For All"))
 }

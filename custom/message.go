@@ -10,7 +10,7 @@ import (
 
 var (
 	deathInventory   = "§e%s§7[§e%v§7] was slain by §e%s§7[§e%v§7]"
-	deathNoInventory = "§e%s§7 was slain by §e%s"
+	deathNoInventory = "§e%s§7 was slain by §e%s§7"
 )
 
 func ItemInInv(i world.Item, p *player.Player) int {

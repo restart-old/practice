@@ -9,7 +9,6 @@ import (
 	"github.com/RestartFU/practice/custom"
 
 	"github.com/df-mc/dragonfly/server/item"
-	"github.com/df-mc/dragonfly/server/item/tool"
 	"github.com/df-mc/dragonfly/server/player"
 	"github.com/df-mc/dragonfly/server/player/form"
 	"github.com/df-mc/dragonfly/server/world"
@@ -49,7 +48,7 @@ func newButton(name, texture string, s *custom.Server) form.Button {
 func (FFASword) Name() string { return "§r§eFree For All" }
 
 // Item returns the item that must be used.
-func (FFASword) Item() world.Item { return item.Sword{Tier: tool.TierDiamond} }
+func (FFASword) Item() world.Item { return item.Sword{Tier: item.ToolTierDiamond} }
 
 // Use sends the from for the FFASword item.
 func (ffa FFASword) Use(s item.Stack, p *player.Player) {
