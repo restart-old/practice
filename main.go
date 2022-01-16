@@ -50,9 +50,9 @@ func main() {
 	s.Start()
 	s.CloseOnProgramEnd()
 
-	loadWorld("./data/world2", "NoDebuff", s)
-	loadWorld("./data/world3", "Gapple", s)
-	loadWorld("./data/world4", "Fist", s)
+	loadWorld("./data/world2", "§8NoDebuff", s)
+	loadWorld("./data/world3", "§8Gapple", s)
+	loadWorld("./data/world4", "§8Fist", s)
 
 	setWorldSettings(s)
 	for {
