@@ -1,0 +1,22 @@
+[Network]
+  Address = ":19132"
+
+[Players]
+  Folder = "players"
+  MaxCount = 500
+  MaximumChunkRadius = 8
+  SaveData = false
+
+[Resources]
+  Folder = "data/resources"
+
+[Server]
+  AuthEnabled = false
+  JoinMessage = ""
+  Name = "§eSGPractice Experimental"
+  QuitMessage = ""
+  ShutdownMessage = "Server closed."
+
+[World]
+  Folder = "data/world"
+  Name = "Practice"
