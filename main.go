@@ -10,9 +10,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func init() {
-}
-
 func main() {
 	var config server.Config
 	if err := gophig.GetConfComplex("./config.toml", gophig.TOMLMarshaler{}, &config); err != nil {
@@ -24,6 +21,8 @@ func main() {
 	logger.Level = logrus.DebugLevel
 
 	s := custom.NewServer(&config, logger)
+
+	s.Allow(Allower{s: s})
 
 	cmd.Register(commands.WhiteList(s.Whitelist()))
 	cmd.Register(commands.Time())
