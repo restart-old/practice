@@ -1,15 +1,12 @@
 package main
 
 import (
-	"github.com/RestartFU/practice/custom"
-	"github.com/RestartFU/practice/handler/handler_combo"
-
-	"github.com/RestartFU/practice/ffas"
-	"github.com/RestartFU/practice/handler"
-	"github.com/RestartFU/practice/kits"
-
 	"github.com/RestartFU/gophig"
+	"github.com/RestartFU/practice/commands"
+	"github.com/RestartFU/practice/custom"
+	"github.com/RestartFU/practice/handler"
 	"github.com/df-mc/dragonfly/server"
+<<<<<<< Updated upstream
 	"github.com/df-mc/dragonfly/server/block/cube"
 	"github.com/df-mc/dragonfly/server/item"
 	"github.com/df-mc/dragonfly/server/item/tool"
@@ -17,49 +14,51 @@ import (
 	"github.com/df-plus/items"
 	"github.com/df-plus/moreHandlers"
 	"github.com/go-gl/mathgl/mgl64"
+=======
+	"github.com/df-mc/dragonfly/server/cmd"
+>>>>>>> Stashed changes
 	"github.com/sirupsen/logrus"
 )
 
 func init() {
-	chat.Global.Subscribe(chat.StdoutSubscriber{})
-}
-
-func init() {
-	kits.Register(kits.NoDebuff{})
-	kits.Register(kits.Gapple{})
-	kits.Register(kits.Fist{})
 }
 
 func main() {
-	config := server.DefaultConfig()
-	gophig.GetConfComplex("./config.toml", gophig.TOMLMarshaler{}, &config)
+	var config server.Config
+	if err := gophig.GetConfComplex("./config.toml", gophig.TOMLMarshaler{}, &config); err != nil {
+		panic(err)
+	}
 
-	s := custom.NewServer(&config, logger())
+	logger := logrus.New()
+	logger.Formatter = &logrus.TextFormatter{ForceColors: true}
+	logger.Level = logrus.DebugLevel
 
-	ffas.Register(ffas.NoDebuffFFA(s))
-	ffas.Register(ffas.GappleFFA(s))
-	ffas.Register(ffas.FistFFA(s))
+	s := custom.NewServer(&config, logger)
 
-	RegisterAllCommands(s)
+	cmd.Register(commands.WhiteList(s.Whitelist()))
+	cmd.Register(commands.Time())
+	cmd.Register(commands.GameMode())
 
-	s.World().SetSpawn(cube.PosFromVec3(mgl64.Vec3{291, 77, 176}))
+	if err := s.Start(); err != nil {
+		panic(err)
+	}
 
-	items.Register(FFASword{server: s})
-
-	s.Allow(Allower{s: s})
-	s.Start()
 	s.CloseOnProgramEnd()
 
+<<<<<<< Updated upstream
 	loadWorld("./data/world2", "NoDebuff", s)
 	loadWorld("./data/world3", "Gapple", s)
 	loadWorld("./data/world4", "Fist", s)
 
 	setWorldSettings(s)
+=======
+>>>>>>> Stashed changes
 	for {
 		p, err := s.Accept()
 		if err != nil {
 			return
 		}
+<<<<<<< Updated upstream
 		p.Player().Inventory().Clear()
 		p.Player().Armour().Clear()
 		go handleJoin(p)
@@ -84,4 +83,8 @@ func handleJoin(p *custom.Player) {
 	h.AddHandler(handler_combo.NewComboHandler(p))
 
 	p.Player().Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§eFFA - Unranked"))
+=======
+		p.Handle(handler.PlayerHandler(p))
+	}
+>>>>>>> Stashed changes
 }

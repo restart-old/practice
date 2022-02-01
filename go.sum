@@ -53,8 +53,8 @@ github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGX
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/df-mc/dragonfly v0.4.3-0.20211219122229-c554b85cd881/go.mod h1:saPioTIQPe/rDjVCbwkPie95qBuFilmreqZJM3HylOo=
 github.com/df-mc/dragonfly v0.4.3-0.20211228034935-5c6150017867/go.mod h1:saPioTIQPe/rDjVCbwkPie95qBuFilmreqZJM3HylOo=
+<<<<<<< Updated upstream
 github.com/df-mc/dragonfly v0.5.2-0.20220108220621-5a51ed6d4919/go.mod h1:n/ZtuBD7m9RilP4alZ3B8T93ZWnGF7ZEpTJ4zbyePZw=
 github.com/df-mc/dragonfly v0.5.2-0.20220109181251-135829d473dd/go.mod h1:GvfWpA+e+/fh1JO7ysygJAvnCH5X0Z6gUfSI7y37mkA=
 github.com/df-mc/dragonfly v0.5.2-0.20220113172605-39265eb1c403/go.mod h1:GvfWpA+e+/fh1JO7ysygJAvnCH5X0Z6gUfSI7y37mkA=
@@ -81,6 +81,14 @@ github.com/df-plus/moreHandlers v0.0.0-20220109222938-3f9c21b0a1ef h1:b1IMwWSa94
 github.com/df-plus/moreHandlers v0.0.0-20220109222938-3f9c21b0a1ef/go.mod h1:DpLJJ9hjbfZho6xQ7yCKjbrfAxTpDB/FhOef9pPVxwE=
 github.com/df-plus/worldmanager v0.0.0-20220113163416-91cbee8d3cd9 h1:tEvfZbu1dEh+s2hNAyv+/Vwh91y2o/IDxRAg2KphmKw=
 github.com/df-plus/worldmanager v0.0.0-20220113163416-91cbee8d3cd9/go.mod h1:dqZQPT5ja4ebfCjkM6Vq+xRmeyPtnzUanvLM4JX5/xQ=
+=======
+github.com/df-mc/dragonfly v0.5.2-0.20220122125012-15d7cef7ff2a h1:qP5Mh4OzRIfSQJdqIB4Q/b65DlH0HBwVNR1Tp91ubGE=
+github.com/df-mc/dragonfly v0.5.2-0.20220122125012-15d7cef7ff2a/go.mod h1:3KyyztYa7XIhssjBsSJD589CFtg6HUnTR2cnen7gjVU=
+github.com/df-mc/goleveldb v1.1.9 h1:ihdosZyy5jkQKrxucTQmN90jq/2lUwQnJZjIYIC/9YU=
+github.com/df-mc/goleveldb v1.1.9/go.mod h1:+NHCup03Sci5q84APIA21z3iPZCuk6m6ABtg4nANCSk=
+github.com/df-plus/cooldown v0.0.0-20220115224559-13b99656848c h1:uatVyzd7Ae/6HVYE+4Qkqx6O0/kP6Bpuv0TTbvJNXbA=
+github.com/df-plus/cooldown v0.0.0-20220115224559-13b99656848c/go.mod h1:4F3K44mt58v6Oi0VOJZq2QMFclM1yP9hw8HTp4nnnR0=
+>>>>>>> Stashed changes
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
@@ -180,8 +188,13 @@ github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFR
 github.com/sandertv/go-raknet v1.10.2 h1:aVwwSOhZQND6fo6aBJbJ4TSWIpfJWoxZMY//StAk7h4=
 github.com/sandertv/go-raknet v1.10.2/go.mod h1:s1lD7LTts74R9csTeI4WlGcp6PmXAGX+DeJlQF3KMlg=
 github.com/sandertv/gophertunnel v1.17.1/go.mod h1:cu9ZDQVTXY1RJO/te3syrPvCeCAzKt9eB4jkSzXljTw=
+<<<<<<< Updated upstream
 github.com/sandertv/gophertunnel v1.18.1 h1:JHULaRk83QRY9/H8wmngU7HLGIaGse2cMaYpZl4xWfM=
 github.com/sandertv/gophertunnel v1.18.1/go.mod h1:cu9ZDQVTXY1RJO/te3syrPvCeCAzKt9eB4jkSzXljTw=
+=======
+github.com/sandertv/gophertunnel v1.18.2 h1:PlQ7v3LhdjmawXdiJe0MkZdNpn4p2hWkxBJB38KGZA4=
+github.com/sandertv/gophertunnel v1.18.2/go.mod h1:cu9ZDQVTXY1RJO/te3syrPvCeCAzKt9eB4jkSzXljTw=
+>>>>>>> Stashed changes
 github.com/sirupsen/logrus v1.8.1 h1:dJKuHgqk1NNQlqoA6BTlM1Wf9DOH3NBjQyu0h9+AZZE=
 github.com/sirupsen/logrus v1.8.1/go.mod h1:yWOB1SBYBC5VeMP7gHvWumXLIWorT60ONWic61uBYv0=
 github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72 h1:qLC7fQah7D6K1B0ujays3HV9gkFtllcxhzImRR7ArPQ=
@@ -278,8 +291,9 @@ golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45/go.mod h1:gOpvHmFTYa4Iltr
 golang.org/x/oauth2 v0.0.0-20191202225959-858c2ad4c8b6/go.mod h1:gOpvHmFTYa4IltrdGE7lF6nIHvwfUNPOp7c8zoXwtLw=
 golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d/go.mod h1:gOpvHmFTYa4IltrdGE7lF6nIHvwfUNPOp7c8zoXwtLw=
 golang.org/x/oauth2 v0.0.0-20200902213428-5d25da1a8d43/go.mod h1:KelEdhl1UZF7XfJ4dDtk6s++YSgaE7mD/BuKKDLBl4A=
-golang.org/x/oauth2 v0.0.0-20210628180205-a41e5a781914 h1:3B43BWw0xEBsLZ/NO1VALz6fppU3481pik+2Ksv45z8=
 golang.org/x/oauth2 v0.0.0-20210628180205-a41e5a781914/go.mod h1:KelEdhl1UZF7XfJ4dDtk6s++YSgaE7mD/BuKKDLBl4A=
+golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 h1:RerP+noqYHUQ8CMRcPlC2nvTa4dcBIjegkuWdcUDuqg=
+golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8/go.mod h1:KelEdhl1UZF7XfJ4dDtk6s++YSgaE7mD/BuKKDLBl4A=
 golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20181108010431-42b317875d0f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20181221193216-37e7f081c4d4/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=

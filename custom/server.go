@@ -1,87 +1,45 @@
 package custom
 
 import (
-	"fmt"
-	"os"
-	"os/signal"
-	"strings"
-	"sync"
-	"syscall"
-
 	"github.com/RestartFU/gophig"
 	"github.com/RestartFU/list"
 	"github.com/df-mc/dragonfly/server"
-	"github.com/df-mc/dragonfly/server/player"
-	mw "github.com/df-plus/worldmanager"
 	"github.com/sirupsen/logrus"
 )
 
+// Server embeds *server.Server.
 type Server struct {
 	*server.Server
-	worldManager *mw.WorldManager
+	logger *logrus.Logger
 
 	whitelist *list.List
-	operators *list.List
-	ban       *list.List
-
-	players   map[*player.Player]*Player
-	playersMu sync.RWMutex
 }
 
-// newList ...
-func newList(name, extension string) *list.List {
-	settings := &list.Settings{
-		CacheOnly: false,
-		Gophig:    gophig.NewGophig(name, extension, 0777),
-	}
-	list, err := list.New(settings)
+// NewServer returns a new *Server
+func NewServer(config *server.Config, logger *logrus.Logger) *Server {
+	s := server.New(config, logger)
+	wl, err := list.New(&list.Settings{CacheOnly: false, Gophig: gophig.NewGophig("./whitelist", "toml", 0777)})
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
-	return list
-}
-
-// NewServer returns a new *Server.
-func NewServer(c *server.Config, log *logrus.Logger) *Server {
-	s := server.New(c, log)
-	worldManager := mw.New(s, log)
-
-	ban := newList("./data/lists/bans", "toml")
-	whitelist := newList("./data/lists/whitelist", "toml")
-	operators := newList("./data/lists/operators", "toml")
-
-	return &Server{Server: s,
-		worldManager: worldManager,
-		whitelist:    whitelist,
-		operators:    operators,
-		ban:          ban,
-		players:      make(map[*player.Player]*Player),
+	return &Server{
+		Server:    s,
+		logger:    logger,
+		whitelist: wl,
 	}
 }
 
-// WorldManager returns the world manager of the server.
-func (s *Server) WorldManager() *mw.WorldManager { return s.worldManager }
-
-// Accept accepts the incoming player and returns it as *custom.Player.
-// it only returns an error when the server is closed.
-func (s *Server) Accept() (*Player, error) {
-	p, err := s.Server.Accept()
-	return NewPlayer(p, s), err
-}
-
-// PlayerByName ...
-func (s *Server) PlayerByName(username string) (*Player, bool) {
-	for _, p := range s.Players() {
-		if strings.EqualFold(p.Name(), username) {
-			s.playersMu.RLock()
-			defer s.playersMu.RUnlock()
-			player, ok := s.players[p]
-			return player, ok
-		}
+// Accept accepts the incoming connections and returns a new *custom.Player.
+// It only returns an error when the server is closed.
+func (server *Server) Accept() (*Player, error) {
+	p, err := server.Server.Accept()
+	if err != nil {
+		return nil, err
 	}
-	return nil, false
+	return NewPlayer(p), nil
 }
 
+<<<<<<< Updated upstream
 // RemovePlayer ...
 func (s *Server) RemovePlayer(p *Player) {
 	s.playersMu.Lock()
@@ -121,3 +79,7 @@ func (s *Server) CloseOnProgramEnd() {
 		}
 	}()
 }
+=======
+// Whitelist returns the server whitelist
+func (server *Server) Whitelist() *list.List { return server.whitelist }
+>>>>>>> Stashed changes

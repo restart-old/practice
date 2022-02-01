@@ -1,6 +1,7 @@
 package custom
 
 import (
+<<<<<<< Updated upstream
 	"math"
 	"time"
 
@@ -9,16 +10,22 @@ import (
 	"github.com/df-mc/dragonfly/server/entity/healing"
 	"github.com/df-mc/dragonfly/server/item"
 	"github.com/df-mc/dragonfly/server/item/tool"
+=======
+	cooldown2 "github.com/RestartFU/practice/cooldown"
+>>>>>>> Stashed changes
 	"github.com/df-mc/dragonfly/server/player"
-	"github.com/df-mc/dragonfly/server/player/chat"
-	"github.com/df-mc/dragonfly/server/world"
 	"github.com/df-plus/cooldown"
+<<<<<<< Updated upstream
 	"github.com/df-plus/ffa"
 	"github.com/df-plus/kit"
 	"github.com/go-gl/mathgl/mgl64"
+=======
+>>>>>>> Stashed changes
 )
 
+// Player embeds *player.Player, so we can have more information into the struct.
 type Player struct {
+<<<<<<< Updated upstream
 	player *player.Player
 	s      *Server
 
@@ -26,13 +33,21 @@ type Player struct {
 	cps   int
 
 	cdManager *cooldown.Manager
+=======
+	// This is the embedded *player.Player.
+	*player.Player
+>>>>>>> Stashed changes
 
-	lastHurt world.Entity
+	// The display name is the string that will be shown as the name of the player
+	// in chat and in the name tag.
+	displayName string
 
-	ffa ffa.FFA
+	// The coolDown manager manages the coolDowns for the Player
+	coolDownManager *cooldown.Manager
 }
 
 // NewPlayer returns a new *Player.
+<<<<<<< Updated upstream
 func NewPlayer(p *player.Player, s *Server) *Player {
 	cPlayer := &Player{player: p, s: s, cdManager: cooldown.NewManager()}
 	cPlayer.cdManager.NewCooldown("ender_pearl")
@@ -212,4 +227,24 @@ func (p *Player) Spawn() {
 	p.Player().Heal(player.MaxHealth(), healing.SourceCustom{})
 	p.SetFFA(nil)
 	p.Player().Inventory().SetItem(0, item.NewStack(item.Sword{Tier: tool.TierDiamond}, 1).WithCustomName("§eFFA - Unranked"))
+=======
+func NewPlayer(p *player.Player) *Player {
+	return &Player{
+		Player:          p,
+		displayName:     p.Name(),
+		coolDownManager: cooldown.NewManager(),
+	}
+}
+
+// DisplayName returns the display name of the player.
+func (player *Player) DisplayName() (displayName string) { return player.displayName }
+
+// SetDisplayName sets a new display name for the player.
+// This display name will be shown in chat and in the name tag.
+func (player *Player) SetDisplayName(displayName string) { player.displayName = displayName }
+
+// CoolDown returns the *cooldown.Cooldown of the argument passed.
+func (player *Player) CoolDown(cd cooldown2.CoolDown) *cooldown.Cooldown {
+	return player.coolDownManager.Cooldown(cd.String())
+>>>>>>> Stashed changes
 }

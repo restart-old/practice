@@ -11,7 +11,7 @@
   Folder = "data/resources"
 
 [Server]
-  AuthEnabled = true
+  AuthEnabled = false
   JoinMessage = ""
   Name = "§eSGPractice Experimental"
   QuitMessage = ""
