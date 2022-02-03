@@ -14,5 +14,10 @@ func (a Allower) Allow(addr net.Addr, d login.IdentityData, c login.ClientData) 
 	if wl := a.s.Whitelist(); !wl.Listed(d.DisplayName) && wl.Enabled {
 		return "the server is whitelisted", false
 	}
+	if conn, ok := a.s.AllowedData()[c.DeviceModel]; !ok || conn.IdentityData().DisplayName != d.DisplayName {
+		return "bruh", false
+	} else {
+		a.s.SetConn(conn, addr)
+	}
 	return "", true
 }

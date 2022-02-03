@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/df-mc/dragonfly/server/player"
 	"github.com/df-plus/cooldown"
+	"github.com/sandertv/gophertunnel/minecraft"
 )
 
 // Player embeds *player.Player, so we can have more information into the struct.
@@ -17,14 +18,18 @@ type Player struct {
 
 	// The coolDown manager manages the coolDowns for the Player
 	coolDownManager *cooldown.Manager
+
+	// conn ...
+	conn *minecraft.Conn
 }
 
 // NewPlayer returns a new *Player.
-func NewPlayer(p *player.Player) *Player {
+func NewPlayer(p *player.Player, conn *minecraft.Conn) *Player {
 	return &Player{
 		Player:          p,
 		displayName:     p.Name(),
 		coolDownManager: cooldown.NewManager(),
+		conn:            conn,
 	}
 }
 
@@ -39,3 +44,6 @@ func (player *Player) SetDisplayName(displayName string) { player.displayName = 
 func (player *Player) CoolDown(cd fmt.Stringer) *cooldown.Cooldown {
 	return player.coolDownManager.Cooldown(cd.String())
 }
+
+// Conn ...
+func (player *Player) Conn() *minecraft.Conn { return player.conn }

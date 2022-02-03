@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/RestartFU/gophig"
+	"github.com/RestartFU/practice/anticheat"
 	"github.com/RestartFU/practice/commands"
 	"github.com/RestartFU/practice/custom"
 	"github.com/RestartFU/practice/handler"
@@ -31,6 +32,13 @@ func main() {
 	if err := s.Start(); err != nil {
 		panic(err)
 	}
+
+	var cfg anticheat.Config
+	if err := gophig.GetConfComplex("./ACconfig.toml", gophig.TOMLMarshaler{}, &cfg); err != nil {
+		panic(err)
+	}
+	ac := anticheat.New(&cfg, s, logger)
+	go ac.Start()
 
 	s.CloseOnProgramEnd()
 
